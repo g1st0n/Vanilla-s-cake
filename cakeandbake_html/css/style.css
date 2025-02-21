@@ -500,17 +500,23 @@ color: #000000;
 }
  .tab-content{
      background: #fff;
-     padding: 30px;
+     padding: 5px;
      border-radius: 5px;
      display:block;
+     box-sizing: border-box;
 }
 /*=========================== Menu ============================ */
-#menu .tab-pane {
-    text-align: center;
+/* Menu item styling */
+#menu .nav-tabs {
+    margin-bottom: 30px;
 }
 
-#menu .tab-pane.active {
-    display: block;
+#menu .img-price {
+    transition: all 0.35s ease-in-out;
+}
+
+#menu .tab-pane {
+    text-align: center;
 }
 
 .prices-main {
@@ -521,86 +527,184 @@ color: #000000;
 .menu-body {
     margin: 0 auto;
     display: block;
+    max-width: 100%;
+    overflow: hidden; /* Prevent body overflow */
 }
 
 .menu-item {
-    display: flex; /* Flexbox to make the layout horizontal */
-    flex-direction: row; /* Horizontal arrangement */
-    align-items: center; /* Vertically center items */
-    margin: 30px 0; /* 5px margin to create 2mm (approx) spacing between cards */
-    padding: 20px; /* Increase padding for a larger card */
-    background-color: #fdf0f0; /* Light background color */
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    text-align: left; /* Left-align text for name and price */
-    width: calc(100% - 14px); /* Increase width by 7px */
-    max-width: 100%; /* Ensure it doesn't exceed the container's width */
-    height: auto; /* Let height be flexible */
-    box-sizing: border-box; /* Include padding in the width */
+    display: flex; /* Flexbox for layout */
+    flex-direction: row; /* Keep image and price in a row */
+    align-items: center; /* Vertically align items */
+    margin: 20px 0px;
+    font-size: 20px;
+    min-height: 150px;
+    padding: 10px;
+    width: 100%; /* Ensure each item spans the full row */
+    max-width: 100%; /* Ensure it doesn't exceed the container */
+    overflow: hidden; /* Hide overflow */
+    justify-content: flex-start; /* Align items to the start */
+    box-sizing: border-box; /* Ensure padding doesn't cause overflow */
 }
-.menu-item-name + div {
-    text-align: center;
-}
+
+/* Menu item name style */
 .menu-item-name {
-    font-size: 18px; /* Slightly smaller font size for mobile */
-    font-weight: bold;
-    color: #333;
-    margin-top: 0;
-    border-bottom: 2px solid #8B3A62; /* Solid line under the name */
-    padding-bottom: 8px;
-    text-align: left; /* Left-align the name */
-    margin-left: 20px; /* Increased margin to create space between name and image */
-    flex-grow: 1; /* Allow name/price to grow and take available space */
+    text-align: left;
+    font-weight: 700;
+    color: #000;
+    margin-left: 15px; /* Add margin to create space between the image and text */
+    flex-grow: 2; /* Allow name to take more available space */
+    font-size: 18px;
+    white-space: normal; /* Allow wrapping for mobile */
+    word-wrap: break-word; /* Prevent text from overflowing */
+    overflow-wrap: break-word; /* Break words if needed */
+    display: block;
 }
 
+/* Menu item price style */
 .menu-item-price {
-    font-size: 20px; /* Slightly smaller font size for mobile */
+    font-size: 22px;
+    font-family: Satisfy;
     color: #8B3A62;
-    font-family: 'Satisfy', cursive;
-    margin-top: 10px;
-    text-align: left; /* Left-align the price */
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Add ellipsis if price is too long */
+    margin-top: 5px; /* Space between the name and price */
+    margin-left: 10px; /* Space to separate price from the name */
+    flex-shrink: 0; /* Prevent price from shrinking */
 }
 
+/* Menu item image style (egg-like and smaller) */
 .menu-item-pic {
-    width: 162px; /* Increased width by 3mm (approx. 7px) */
-    height: 162px; /* Increased height by 3mm (approx. 7px) */
-    margin-right: 25px; /* Increased margin to create space between image and text */
+    width: 70px; /* Smaller width */
+    height: 70px; /* Adjust height to match the width for a smaller egg shape */
+    max-width: 100%;
+    border-radius: 50%; /* Makes the image egg-shaped */
+    overflow: hidden;
 }
-
 .menu-item-pic img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensure the image covers the container */
-    border-radius: 15px; /* Rounded corners */
-    border: 2px solid #ddd; /* Soft border around the image */
-    transition: all 0.35s ease-in-out; /* Smooth transition for hover effect */
+    object-fit: cover; /* Crop image to fit without stretching */
 }
 
-/* Mobile-specific styles */
+/* Ensure the items take full width within the col-lg-9 */
+.col-lg-9 .menu-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* Mobile responsiveness */
 @media (max-width: 767px) {
-    .menu-item {
-        flex-direction: column; /* Stack the content vertically for small screens */
-        align-items: center; /* Center content horizontally */
-        padding: 15px; /* Less padding on small screens */
-        margin: 10px 0; /* Less margin on small screens */
+   /* Ensure the layout is row-wise for the image, name, and price */
+.menu-item {
+    display: flex;
+    flex-direction: row-reverse; /* Put the image and price on the right */
+    align-items: center;
+    margin: 20px 0px;
+    font-size: 20px;
+    padding: 5px;
+    width: 100%;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    height: 150px; /* Fixed height for all items to ensure uniformity */
+}
+
+/* Container for name and description */
+.menu-item-details {
+    display: flex;
+    flex-direction: column; /* Stack the name and description vertically */
+    justify-content:space-between; /* Space out the elements from top to bottom */
+    align-items: center; /* Center the name and description */
+    flex-grow: 1; /* Allow this section to grow and take available space */
+    margin-left: 10px; /* Add margin to avoid crowding with the image */
+    margin-right: 10px; /* Add margin to avoid crowding with the price */
+    height: 100%; 
+    order: 1; /* Move the price before the name */
+    /*sure the details section fills the available height */
+}
+.menu-item-details .menu-item-name {
+
+    text-align: center; 
+    flex-grow: 1; /* Make name take up available space */
+    display: flex; /* Enable flexbox for positioning */
+    align-items: flex-end;  
+}
+.menu-item-details .menu-item-description {
+    margin-bottom: auto; /* Push the description to the top of the column */
+    text-align: center;
+    margin-top: 0; 
+    flex-grow: 1; /* Make description take up available space */
+    display: flex; /* Enable flexbox for positioning */
+    align-items: flex-start;
     }
 
-    .menu-item-pic {
-        width: 110px; /* Increased width for mobile */
-        height: 110px; /* Increased height for mobile */
-        margin-bottom: 15px; /* Add space below the image */
-    }
+/* Menu item name style */
+.menu-item-name {
+    font-weight: 700;
+    font-size: 20px;
+    font-family: satisfy;
+    color: #000;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-align: center; 
+    order: 1;
+    border-bottom: 2px solid ; /* Add a thin line under the name */
+    /* Move the price before the name */
+    /* Center the name */
+}
 
-    .menu-item-name {
-        font-size: 16px; /* Smaller font size */
-        margin-left: 0; /* Remove left margin on small screens */
-        text-align: center; /* Center the text */
-    }
+/* Menu item description style */
+.menu-item-description  {
+    font-size: 14px;
+    color: #888;
+    line-height: 1.5;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-align: center; 
+    order: 1; /* Move the price before the name */
+    /* Center the description */
+}
 
-    .menu-item-price {
-        font-size: 18px; /* Smaller price font size */
-        text-align: center; /* Center the price */
-    }
+
+/* Menu item price style */
+.menu-item-price {
+    font-size: 23px;
+    font-family: Satisfy;
+    color: #8B3A62;
+    white-space: nowrap;
+    margin-top: 5px;
+margin-right: 5px;
+    flex-shrink: 0;
+    text-align: center;
+    position: relative;
+    bottom: 50px;
+    left: 20px;
+    /* Center the price */
+}
+
+/* Make the image bigger and consistent */
+.menu-item-pic {
+    width: 120pxpx; /* Smaller width for the image */
+    height: 120px; /* Adjust the height to maintain aspect ratio */
+    max-width: 120px;
+    border-radius: 50%; /* Make the image round */
+    overflow: hidden;
+    flex-shrink: 0;
+    margin-right: 15px; 
+    border: 5px solid rgb(56, 56, 56)
+/* Space between image and the name/description */
+}
+
+/* Image inside the container */
+.menu-item-pic img {
+    width: 100%; /* Ensure the image takes full width of the container */
+    height: 100%; /* Ensure the image takes full height of the container */
+    object-fit: cover; /* Crop the image to fit the container without stretching */
+}
+
 }
 
 
@@ -1258,117 +1362,170 @@ color: #000000;
      font-weight:700;
 }
 /* Owl-carousel */
-/* .carousel {
-    background: #ffffff;
-    padding: 10px 0;
-  }
-  
 
-  .carousel-cell {
-    width: 66%;
-    height: 260px; 
-    margin-right: 10px;
-    background: rgb(255, 255, 255);
-    border-radius: 5px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-  }
-  
 
-  .carousel-cell img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover; 
-    display: block;
-    border-radius: 15px;
-  }
-  
-  
-  .carousel-text {
-    font-size: 2.4em;
-    line-height: 1em;
-    font-family: Satisfy;
-    margin-top: 15px; 
-    margin-bottom: 10px;
-    letter-spacing: -0.5px;
-    text-align: center;
-  }
-   */
-   .category-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columns per row */
-    gap: 1px 0px; /* Adjust the gap between columns */
-    width: 100%; /* Ensure it takes the full width */
-    margin: 0 auto; /* Center the container */
-    padding: 10px;
-    box-sizing: border-box; /* Make sure padding doesn't cause overflow */
-    text-align: center;
-    font-family: Arial, sans-serif;
-    border: 2px solid rgb(252, 138, 138); /* Adding a border around the container */
-    border-radius: 10px;
-}
-
-.category-container h3 {
-    font-size: 20px; /* Set font size to 20px */
-    font-weight: bold;
-    padding: 15px 0px;
-    color: #8B3A62; /* Dark rose color */
-    cursor: pointer;
+    /* Carousel container */
+    .carousel {
+        background: #f3dddd;
+        justify-content: center;
+        align-items: center;
+        padding: 10px ;
+        overflow: hidden; /* Ensure no overflow */
+      }
+      
+      /* Carousel cell */
+      .carousel-cell {
+        width: 140px;  /* Ensure the cell takes up full width */
+        height: 120px; /* Set the desired height for each carousel cell */
+        margin-right: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffffff;
+        border-radius: 10px;
+      }
+      .category-card.active {
+        background-color:rgb(143, 202, 182);; /* Dark rose background for active state */
+        border: 1px solid rgb(143, 202, 182); /* Change border color when active */
+    }
+    .category-card.active i {
+        color: white; /* Change icon color to white when active */
+    }
     
-    white-space: nowrap; /* Prevent text from wrapping */
-    margin: 2px 0; /* Reduced vertical space */
-    transition: color 0.1s, border-bottom 0.1s;
- }
-
-/* Hover and active state styles */
-
-.category-container h3.active {
-    color: black;
-    border-bottom: 0.5px solid black;
-
-}
-
-/* Add icon before the text in category cards */
-.category-card h3 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.category-card  {
-    margin-right: 8px;
-    transition: color 0.1s, border-bottom 0.1s;
-    /* Space between the icon and the text */
-}
-
+    .category-card.active h3 {
+        color: white; /* Change text color to white when active */
+    }
+    
+    .category-container h3.active {
+        color: white; /* Change text color to white when active */
+      
+    }
+      /* Remove the counter number */
+      .carousel-cell:before {
+        display: none; /* Hide the number */
+      }
+      /* Hide Flickity page dots */
+    .flickity-page-dots {
+        display: none !important;
+      }
+      
+      /* Category card */
+      .category-card {
+        width: 150px;  /* Ensure the cell takes up full width */
+        height: 120px;/* Full height of the carousel cell */
+        background: #FFF;
+        display: flex;
+        justify-content: center;  /* Center the content horizontally */
+        align-items: center;  /* Center the content vertically */
+        flex-direction: column; /* Stack the icon and text vertically */
+        text-align: center;
+        border-radius: 10px;
+        box-sizing: border-box;  /* Ensure padding doesn't cause overflow */
+        padding: 20px;
+    
+      }
+      
+      /* Icon styling */
+      
+      .category-card svg {
+        font-size: 40px;
+        color: #8C8; /* Adjust icon color */
+        margin-bottom: 10px;
+      }
+      
+      
+      /* Heading styling */
+      .category-card h3 {
+        font-size: 16px;
+        color: #333;  /* Adjust text color */
+        margin: 0;
+        white-space: nowrap; 
+      }
+      
+      /* Hover effect for category card */
+      .category-card:hover {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hover effect */
+      }
+      
 /* Ensure the cards are responsive and prevent overflow */
 @media (max-width: 767px) {
-    .category-container {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns on smaller screens */
-    }
+   /* Hide the Flickity loading spinner */
 
-    .category-container h3 {
-        font-size: 18px; 
-        /* Slightly smaller font size for small screens */
-    }
-}
+    /* Carousel container */
+.carousel {
+    background: #fff3f3;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0px ;
+    padding-right: 0px ;
 
-/* Prevent text from overflowing or wrapping outside the card */
-.category-card {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap; /* Prevent text wrapping */
-}
+    overflow: hidden; /* Ensure no overflow */
+  }
+  
+  /* Carousel cell */
+  .carousel-cell {
+    width: 140px;  /* Ensure the cell takes up full width */
+    height: 120px; /* Set the desired height for each carousel cell */
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 10px;
+  }
+  
+  /* Remove the counter number */
+  .carousel-cell:before {
+    display: none; /* Hide the number */
+  }
+  /* Hide Flickity page dots */
+.flickity-page-dots {
+    display: none !important;
+  }
+  .flickity-prev-next-button  {
+    display: none !important;
+  }
+  
+  /* Category card */
+  .category-card {
+    width: 150px;  /* Ensure the cell takes up full width */
+    height: 120px;/* Full height of the carousel cell */
+    background: #FFF;
+    display: flex;
+    justify-content: center;  /* Center the content horizontally */
+    align-items: center;  /* Center the content vertically */
+    flex-direction: column; /* Stack the icon and text vertically */
+    text-align: center;
+    border-radius: 10px;
+    box-sizing: border-box;  /* Ensure padding doesn't cause overflow */
+    padding: 20px;
 
-/* Prevent grid items from overflowing */
-.category-card {
-    box-sizing: border-box; /* Make sure padding/margin doesn't push outside */
-}
+  }
+  
+  /* Icon styling */
+  .category-card i {
+    font-size: 50px;
+    color: #333;
+     /* Adjust icon color */
+    margin-bottom: 10px;
+  }
+  
+  /* Heading styling */
+  .category-card h3 {
+    font-size: 18px;
+    font-weight: bold;
 
-
+    color: #333;  /* Adjust text color */
+    margin: 0;
+  }
+  
+  /* Hover effect for category card */
+  .category-card:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hover effect */
+  }
+  
+    }      
+      
 
 
 
